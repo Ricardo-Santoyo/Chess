@@ -1,5 +1,5 @@
 module Board
-  def create_board
+  def create_board #creates a nested array to represent the board
     i = 0
     board = []
     8.times do
@@ -44,19 +44,97 @@ module Board
         row += " |"
         c += 1
       end
-      puts row
+      puts row += " #{r + 1}"
       puts "―――――――――――――――――――――――――――――――――"
       r -= 1
+    end
+    puts "  a   b   c   d   e   f   g   h  "
+  end
+end
+
+module Piece_movements
+  def move_pawn(piece_position, new_position)
+    x = piece_position[0]
+    y = piece_position[1]
+    new_x = new_position[0]
+    new_y = new_position[1]
+    pawn_color = board[x][y]
+    diffrence_of_x = (x - new_x).abs
+    diffrence_of_y = (y - new_y).abs
+
+    if diffrence_of_x == 0 && diffrence_of_y == 1 #checks if it is a legal move
+      board[x][y] = " "
+      board[new_x][new_y] = "#{pawn_color}"
+      board
+    elsif diffrence_of_x == 0 && diffrence_of_y == 2 && (y == 1 || y == 6)
+      board[x][y] = " "
+      board[new_x][new_y] = "#{pawn_color}"
+      board
+    elsif diffrence_of_x == 1 && diffrence_of_y == 1 && board[new_x][new_y] != " "
+      board[x][y] = " "
+      board[new_x][new_y] = "#{pawn_color}"
+      board
+    else
+      "illegal move"
     end
   end
 end
 
 class Game
-  include Board
+  include Board, Piece_movements
   attr_accessor :board
 
   def initialize
     @board = create_board
+  end
+
+  def letter_to_number_position(position)
+    position = position.split("")
+    case position[0].downcase
+    when "a"
+      position[0] = 0
+    when "b"
+      position[0] = 1
+    when "c"
+      position[0] = 2
+    when "d"
+      position[0] = 3
+    when "e"
+      position[0] = 4
+    when "f"
+      position[0] = 5
+    when "g"
+      position[0] = 6
+    when "h"
+      position[0] = 7
+    else
+      return "invaild position"
+    end
+    position[1] = position[1].to_i - 1
+    position
+  end
+
+  def move(piece_position, new_position)
+    piece_position = letter_to_number_position(piece_position)
+    new_position = letter_to_number_position(new_position)
+    piece = board[piece_position[0]][piece_position[1]]
+
+    case piece #checks if there is a piece on that space
+    when "♟︎", "♙"
+      move_pawn(piece_position, new_position)
+    when "♜", "♖"
+      move_rook(piece_position, new_position)
+    when "♞", "♘"
+      move_knight(piece_position, new_position)
+    when "♝", "♗"
+      move_bishop(piece_position,new_position)
+    when "♛", "♕"
+      move_queen(piece_position,new_position)
+    when "♚", "♔"
+      move_king(piece_position,new_position)
+    else
+      "there is no piece on that space"
+    end
   end
 
   def play
