@@ -78,6 +78,55 @@ module Piece_movements
       "illegal move"
     end
   end
+
+  def move_rook(piece_position, new_position)
+    x = piece_position[0]
+    y = piece_position[1]
+    new_x = new_position[0]
+    new_y = new_position[1]
+    pawn_color = board[x][y]
+    diffrence_of_x = (x - new_x).abs
+    diffrence_of_y = (y - new_y).abs
+    if x < new_x #used to prevent jumping of pieces
+      current_x = x + 1
+      final_x = new_x
+    else
+      current_x = new_x + 1
+      final_x = x
+    end
+
+    if y < new_y #used to prevent jumping of pieces
+      current_y = y + 1
+      final_y = new_y
+    else
+      current_y = new_y + 1
+      final_y = y
+    end
+
+    if diffrence_of_x == 0 #checks if it is a legal move
+      until current_y == final_y #used to prevent jumping of pieces
+        if board[x][current_y] != " "
+          return "illegal move"
+        end
+        current_y += 1
+      end
+      board[x][y] = " "
+      board[new_x][new_y] = "#{pawn_color}"
+      board
+    elsif diffrence_of_y == 0
+      until current_x == final_x #used to prevent jumping of pieces
+        if board[current_x][y] != " "
+          return "illegal move"
+        end
+        current_x += 1
+      end
+      board[x][y] = " "
+      board[new_x][new_y] = "#{pawn_color}"
+      board
+    else
+      "illegal move"
+    end
+  end
 end
 
 class Game
