@@ -127,6 +127,28 @@ module Piece_movements
       "illegal move"
     end
   end
+
+  def move_knight(piece_position, new_position)
+    x = piece_position[0]
+    y = piece_position[1]
+    new_x = new_position[0]
+    new_y = new_position[1]
+    pawn_color = board[x][y]
+    diffrence_of_x = (x - new_x).abs
+    diffrence_of_y = (y - new_y).abs
+
+    if diffrence_of_x == 1 && diffrence_of_y == 2 #checks if it is a legal move
+      board[x][y] = " "
+      board[new_x][new_y] = "#{pawn_color}"
+      board
+    elsif diffrence_of_x == 2 && diffrence_of_y == 1
+      board[x][y] = " "
+      board[new_x][new_y] = "#{pawn_color}"
+      board
+    else
+      "illegal move"
+    end
+  end
 end
 
 class Game

@@ -216,5 +216,65 @@ describe Game do
       game.move("a7", "a6")
       expect(game.move("c4", "a4")).to eql("illegal move")
     end
+
+    it "moves a knight to a new legal postion" do
+      game = Game.new
+      expect(game.move("b1", "c3")).to eql([["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"],
+                                            [" ", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♝", "♟︎", "♞", " ", " ", " ", "♙", "♗"],
+                                            ["♛", "♟︎", " ", " ", " ", " ", "♙", "♕"],
+                                            ["♚", "♟︎", " ", " ", " ", " ", "♙", "♔"],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"]])
+    end
+
+    it "moves a knight to a new legal postion" do
+      game = Game.new
+      game.move("b1", "c3")
+      expect(game.move("c3", "A4")).to eql([["♜", "♟︎", " ", "♞", " ", " ", "♙", "♖"],
+                                            [" ", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            ["♛", "♟︎", " ", " ", " ", " ", "♙", "♕"],
+                                            ["♚", "♟︎", " ", " ", " ", " ", "♙", "♔"],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"]])
+    end
+
+    it "moves a knight to a new legal postion" do
+      game = Game.new
+      game.move("b1", "c3")
+      game.move("b8", "c6")
+      game.move("c3", "A4")
+      game.move("c6", "a5")
+      game.move("b2", "b3")
+      expect(game.move("a5", "b3")).to eql([["♜", "♟︎", " ", "♞", " ", " ", "♙", "♖"],
+                                            [" ", " ", "♘", " ", " ", " ", "♙", " "],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            ["♛", "♟︎", " ", " ", " ", " ", "♙", "♕"],
+                                            ["♚", "♟︎", " ", " ", " ", " ", "♙", "♔"],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"]])
+    end
+
+    it "doesn't move a knight to an illegal position" do
+      game = Game.new
+      expect(game.move("b1", "b4")).to eql("illegal move")
+    end
+
+    it "doesn't move a knight to an illegal position" do
+      game = Game.new
+      game.move("b1", "c3")
+      expect(game.move("c3", "e5")).to eql("illegal move")
+    end
+
+    it "doesn't move a knight to an illegal position" do
+      game = Game.new
+      game.move("b1", "c3")
+      game.move("c3", "A4")
+      expect(game.move("a4", "b4")).to eql("illegal move")
+    end
   end
 end
