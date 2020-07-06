@@ -206,6 +206,24 @@ module Piece_movements
       move_rook(piece_position, new_position)
     end
   end
+
+  def move_king(piece_position, new_position)
+    x = piece_position[0]
+    y = piece_position[1]
+    new_x = new_position[0]
+    new_y = new_position[1]
+    king_color = board[x][y]
+    diffrence_of_x = (x - new_x).abs
+    diffrence_of_y = (y - new_y).abs
+
+    if diffrence_of_x > 1 || diffrence_of_y > 1 # prevents illegal moves
+      "illegal move"
+    else
+      board[x][y] = " "
+      board[new_x][new_y] = "#{king_color}"
+      board
+    end
+  end
 end
 
 class Game

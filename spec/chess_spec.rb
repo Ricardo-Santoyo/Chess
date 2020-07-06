@@ -429,5 +429,82 @@ describe Game do
       game.move("d7", "d5")
       expect(game.move("d8", "c6")).to eql("illegal move")
     end
+
+    it "moves a king to a new legal postion" do
+      game = Game.new
+      game.move("e7", "e6")
+      expect(game.move("e8", "e7")).to eql([["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            ["♛", "♟︎", " ", " ", " ", " ", "♙", "♕"],
+                                            ["♚", "♟︎", " ", " ", " ", "♙", "♔", " "],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"]])
+    end
+
+    it "moves a king to a new legal postion" do
+      game = Game.new
+      game.move("e2", "e4")
+      game.move("f7", "f6")
+      game.move("d1", "h5")
+      game.move("g7", "g5")
+      game.move("h5", "h4")
+      expect(game.move("e8", "f7")).to eql([["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            [" ", "♟︎", " ", " ", " ", " ", "♙", "♕"],
+                                            ["♚", " ", " ", "♟︎", " ", " ", "♙", " "],
+                                            ["♝", "♟︎", " ", " ", " ", "♙", "♔", "♗"],
+                                            ["♞", "♟︎", " ", " ", "♙", " ", " ", "♘"],
+                                            ["♜", "♟︎", " ", "♛", " ", " ", "♙", "♖"]])
+    end
+
+    it "moves a king to a new legal postion" do
+      game = Game.new
+      game.move("f2", "f4")
+      game.move("e7", "e5")
+      game.move("e1", "f2")
+      game.move("e5", "e4")
+      game.move("f4", "f5")
+      game.move("e4", "e3")
+      expect(game.move("f2", "e3")).to eql([["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            ["♛", "♟︎", " ", " ", " ", " ", "♙", "♕"],
+                                            [" ", "♟︎", "♚", " ", " ", " ", " ", "♔"],
+                                            ["♝", " ", " ", " ", "♟︎", " ", "♙", "♗"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"]])
+    end
+
+    it "moves a king to a new legal postion" do
+      game = Game.new
+      game.move("e2", "e3")
+      game.move("e1", "e2")
+      game.move("e2", "d3")
+      game.move("d3", "d4")
+      game.move("d4", "e4")
+      expect(game.move("e4", "f3")).to eql([["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            ["♛", "♟︎", " ", " ", " ", " ", "♙", "♕"],
+                                            [" ", " ", "♟︎", " ", " ", " ", "♙", "♔"],
+                                            ["♝", "♟︎", "♚", " ", " ", " ", "♙", "♗"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"]])
+    end
+
+    it "doesn't move a king to an illegal position" do
+      game = Game.new
+      expect(game.move("e1", "e3")).to eql("illegal move")
+    end
+
+    it "doesn't move a king to an illegal position" do
+      game = Game.new
+      game.move("e2", "e3")
+      game.move("e1", "e2")
+      expect(game.move("e2", "g4")).to eql("illegal move")
+    end
   end
 end
