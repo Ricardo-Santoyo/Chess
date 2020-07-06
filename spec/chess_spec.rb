@@ -364,5 +364,70 @@ describe Game do
       game.move("c1", "e3")
       expect(game.move("e3", "c5")).to eql("illegal move")
     end
+
+    it "moves a queen to a new legal postion" do
+      game = Game.new
+      game.move("e2", "e3")
+      expect(game.move("d1", "f3")).to eql([["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            [" ", "♟︎", " ", " ", " ", " ", "♙", "♕"],
+                                            ["♚", " ", "♟︎", " ", " ", " ", "♙", "♔"],
+                                            ["♝", "♟︎", "♛", " ", " ", " ", "♙", "♗"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"]])
+    end
+
+    it "moves a queen to a new legal postion" do
+      game = Game.new
+      game.move("e2", "e4")
+      game.move("d2", "d3")
+      game.move("d1", "d2")
+      expect(game.move("d2", "e3")).to eql([["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            [" ", " ", "♟︎", " ", " ", " ", "♙", "♕"],
+                                            ["♚", " ", "♛", "♟︎", " ", " ", "♙", "♔"],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"]])
+    end
+
+    it "moves a queen to a new legal postion" do
+      game = Game.new
+      game.move("e2", "e4")
+      game.move("d7", "d5")
+      game.move("d2", "d3")
+      game.move("d8", "d6")
+      game.move("d1", "d2")
+      game.move("d6", "e5")
+      game.move("d2", "e3")
+      game.move("e5", "f5")
+      game.move("e3", "f3")
+      expect(game.move("f5", "f3")).to eql([["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♝", "♟︎", " ", " ", " ", " ", "♙", "♗"],
+                                            [" ", " ", "♟︎", " ", "♙", " ", " ", " "],
+                                            ["♚", " ", " ", "♟︎", " ", " ", "♙", "♔"],
+                                            ["♝", "♟︎", "♕", " ", " ", " ", "♙", "♗"],
+                                            ["♞", "♟︎", " ", " ", " ", " ", "♙", "♘"],
+                                            ["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"]])
+    end
+
+    it "doesn't move a queen to an illegal position" do
+      game = Game.new
+      expect(game.move("d8", "d6")).to eql("illegal move")
+    end
+
+    it "doesn't move a queen to an illegal position" do
+      game = Game.new
+      expect(game.move("d1", "f3")).to eql("illegal move")
+    end
+
+    it "doesn't move a queen to an illegal position" do
+      game = Game.new
+      game.move("d7", "d5")
+      expect(game.move("d8", "c6")).to eql("illegal move")
+    end
   end
 end

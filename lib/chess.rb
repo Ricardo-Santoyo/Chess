@@ -186,6 +186,26 @@ module Piece_movements
       "illegal move"
     end
   end
+
+  def move_queen(piece_position, new_position)
+    x = piece_position[0]
+    y = piece_position[1]
+    new_x = new_position[0]
+    new_y = new_position[1]
+    diffrence_of_x = (x - new_x).abs
+    diffrence_of_y = (y - new_y).abs
+    if diffrence_of_x != 0 #used to prevent divide by zero error
+      slope = diffrence_of_y / diffrence_of_x
+    else
+      slope = 0
+    end
+
+    if slope == 1 #determines whether it is a diagonal or straight line move
+      move_bishop(piece_position, new_position)
+    else
+      move_rook(piece_position, new_position)
+    end
+  end
 end
 
 class Game
