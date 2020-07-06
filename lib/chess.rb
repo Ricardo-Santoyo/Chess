@@ -200,6 +200,18 @@ module Piece_movements
     bishop_color = board[x][y]
     diffrence_of_x = (x - new_x).abs
     diffrence_of_y = (y - new_y).abs
+
+    case bishop_color #a bishop can't capture a piece of the same color 
+    when "♝"
+      if ["♟︎", "♜", "♞", "♝", "♛", "♚"].include?(board[new_x][new_y])
+        return "illegal move"
+      end
+    when "♗"
+      if ["♙", "♖", "♘", "♗", "♕", "♔"].include?(board[new_x][new_y])
+        return "illegal move"
+      end
+    end
+
     if diffrence_of_x != 0 #used to prevent divide by zero error
       slope = diffrence_of_y / diffrence_of_x
     else
