@@ -63,10 +63,18 @@ module Piece_movements
     diffrence_of_y = (y - new_y).abs
 
     if diffrence_of_x == 0 && diffrence_of_y == 1 #checks if it is a legal move
+      if board[new_x][new_y] != " " #prevents a pawn from capturing a piece directly in front of it
+        return "illegal move"
+      end
+
       board[x][y] = " "
       board[new_x][new_y] = "#{pawn_color}"
       board
     elsif diffrence_of_x == 0 && diffrence_of_y == 2 && (y == 1 || y == 6)
+      if board[new_x][new_y] != " " #prevents a pawn from capturing a piece directly in front of it
+        return "illegal move"
+      end
+
       board[x][y] = " "
       board[new_x][new_y] = "#{pawn_color}"
       board

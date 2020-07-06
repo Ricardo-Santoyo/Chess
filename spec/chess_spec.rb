@@ -88,6 +88,21 @@ describe Game do
       expect(game.move("h3", "h5")).to eql("illegal move")
     end
 
+    it "doesn't move a pawn to an illegal position" do
+      game = Game.new
+      game.move("a2", "a4")
+      game.move("a7", "a5")
+      expect(game.move("a4", "a5")).to eql("illegal move")
+    end
+
+    it "doesn't move a pawn to an illegal position" do
+      game = Game.new
+      game.move("a2", "a4")
+      game.move("f7", "f6")
+      game.move("a4", "a5")
+      expect(game.move("a7", "a5")).to eql("illegal move")
+    end
+
     it "moves a rook to a new legal postion" do
       game = Game.new
       game.move("a2", "a4")
