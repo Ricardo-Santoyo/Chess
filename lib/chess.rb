@@ -62,6 +62,17 @@ module Piece_movements
     diffrence_of_x = (x - new_x).abs
     diffrence_of_y = (y - new_y).abs
 
+    case pawn_color #a pawn can't capture a piece of the same color 
+    when "♟︎"
+      if ["♟︎", "♜", "♞", "♝", "♛", "♚"].include?(board[new_x][new_y])
+        return "illegal move"
+      end
+    when "♙"
+      if ["♙", "♖", "♘", "♗", "♕", "♔"].include?(board[new_x][new_y])
+        return "illegal move"
+      end
+    end
+
     if diffrence_of_x == 0 && diffrence_of_y == 1 #checks if it is a legal move
       if board[new_x][new_y] != " " #prevents a pawn from capturing a piece directly in front of it
         return "illegal move"
