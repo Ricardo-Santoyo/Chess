@@ -603,5 +603,15 @@ describe Game do
       game.move("e1", "e2")
       expect(game.move("e2", "g4")).to eql("illegal move")
     end
+
+    it "doesn't move a king to an illegal position" do
+      game = Game.new
+      expect(game.move("e1", "e2")).to eql("illegal move")
+    end
+
+    it "doesn't move a king to an illegal position" do
+      game = Game.new
+      expect(game.move("e8", "f8")).to eql("illegal move")
+    end
   end
 end
