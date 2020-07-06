@@ -108,11 +108,11 @@ module Piece_movements
     diffrence_of_y = (y - new_y).abs
 
     case rook_color #a rook can't capture a piece of the same color 
-    when "♜"
+    when "♜", "♛"
       if ["♟︎", "♜", "♞", "♝", "♛", "♚"].include?(board[new_x][new_y])
         return "illegal move"
       end
-    when "♖"
+    when "♖", "♕"
       if ["♙", "♖", "♘", "♗", "♕", "♔"].include?(board[new_x][new_y])
         return "illegal move"
       end
@@ -202,11 +202,11 @@ module Piece_movements
     diffrence_of_y = (y - new_y).abs
 
     case bishop_color #a bishop can't capture a piece of the same color 
-    when "♝"
+    when "♝", "♛"
       if ["♟︎", "♜", "♞", "♝", "♛", "♚"].include?(board[new_x][new_y])
         return "illegal move"
       end
-    when "♗"
+    when "♗", "♕"
       if ["♙", "♖", "♘", "♗", "♕", "♔"].include?(board[new_x][new_y])
         return "illegal move"
       end
@@ -248,6 +248,7 @@ module Piece_movements
     new_y = new_position[1]
     diffrence_of_x = (x - new_x).abs
     diffrence_of_y = (y - new_y).abs
+
     if diffrence_of_x != 0 #used to prevent divide by zero error
       slope = diffrence_of_y / diffrence_of_x
     else
