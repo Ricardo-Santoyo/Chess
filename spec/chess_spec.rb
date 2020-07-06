@@ -246,6 +246,21 @@ describe Game do
       expect(game.move("c4", "a4")).to eql("illegal move")
     end
 
+    it "doesn't move a rook to an illegal position" do
+      game = Game.new
+      game.move("a2", "a4")
+      game.move("a1", "A3")
+      expect(game.move("a3", "a4")).to eql("illegal move")
+    end
+
+    it "doesn't move a rook to an illegal position" do
+      game = Game.new
+      game.move("a7", "a5")
+      game.move("b7", "b6")
+      game.move("a8", "a6")
+      expect(game.move("a6", "b6")).to eql("illegal move")
+    end
+
     it "moves a knight to a new legal postion" do
       game = Game.new
       expect(game.move("b1", "c3")).to eql([["♜", "♟︎", " ", " ", " ", " ", "♙", "♖"],

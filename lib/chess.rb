@@ -106,6 +106,18 @@ module Piece_movements
     rook_color = board[x][y]
     diffrence_of_x = (x - new_x).abs
     diffrence_of_y = (y - new_y).abs
+
+    case rook_color #a rook can't capture a piece of the same color 
+    when "♜"
+      if ["♟︎", "♜", "♞", "♝", "♛", "♚"].include?(board[new_x][new_y])
+        return "illegal move"
+      end
+    when "♖"
+      if ["♙", "♖", "♘", "♗", "♕", "♔"].include?(board[new_x][new_y])
+        return "illegal move"
+      end
+    end
+
     if x < new_x #used to prevent jumping of pieces
       current_x = x + 1
       final_x = new_x
