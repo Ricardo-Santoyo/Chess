@@ -168,6 +168,17 @@ module Piece_movements
     diffrence_of_x = (x - new_x).abs
     diffrence_of_y = (y - new_y).abs
 
+    case knight_color #a knight can't capture a piece of the same color 
+    when "♞"
+      if ["♟︎", "♜", "♞", "♝", "♛", "♚"].include?(board[new_x][new_y])
+        return "illegal move"
+      end
+    when "♘"
+      if ["♙", "♖", "♘", "♗", "♕", "♔"].include?(board[new_x][new_y])
+        return "illegal move"
+      end
+    end
+
     if diffrence_of_x == 1 && diffrence_of_y == 2 #checks if it is a legal move
       board[x][y] = " "
       board[new_x][new_y] = "#{knight_color}"
