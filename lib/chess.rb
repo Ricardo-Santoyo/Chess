@@ -73,6 +73,24 @@ module Piece_movements
       end
     end
 
+    if (y == 3 || y == 4) && diffrence_of_x == 1 && diffrence_of_y == 1 #en-passant
+      case board[x - 1][y]
+      when "♟︎", "♙"
+        board[x][y] = " "
+        board[x - 1][y] = " "
+        board[new_x][new_y] = "#{pawn_color}"
+        board
+      end
+
+      case board[x + 1][y]
+      when "♟︎", "♙"
+        board[x][y] = " "
+        board[x + 1][y] = " "
+        board[new_x][new_y] = "#{pawn_color}"
+        board
+      end
+    end
+
     if diffrence_of_x == 0 && diffrence_of_y == 1 #checks if it is a legal move
       if board[new_x][new_y] != " " #prevents a pawn from capturing a piece directly in front of it
         return "illegal move"
